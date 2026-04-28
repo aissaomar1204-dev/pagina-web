@@ -1,42 +1,55 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = (e: React.MouseEvent) => {
+  const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isHome) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
   };
 
   const navLinks = [
-    { name: 'Servicios', href: '#services' },
-    { name: 'Precios', href: '#pricing' },
-    { name: 'Sectores', href: '#sectors' },
-    { name: 'Proceso', href: '#process' },
-    { name: 'Contacto', href: '#contact' },
+    { name: 'Servicios', anchor: 'services' },
+    { name: 'Precios',   anchor: 'pricing' },
+    { name: 'Sectores',  anchor: 'sectors' },
+    { name: 'Proceso',   anchor: 'process' },
+    { name: 'Contacto',  anchor: 'contact' },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, anchor: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    if (isHome) {
+      document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate(`/#${anchor}`);
+    }
+  };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'glass py-3 shadow-sm' : 'bg-transparent py-6'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled ? 'glass py-3 shadow-sm' : 'bg-transparent py-6'
+      }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <a
-          href="/"
-          onClick={scrollToTop}
-          className="flex items-center gap-2 group"
-        >
+        <a href="/" onClick={handleLogoClick} className="flex items-center gap-2 group">
           <img
             src="/logo.png"
             alt="Anubis AI Logo"
@@ -52,7 +65,8 @@ export const Header = () => {
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href={link.href}
+              href={isHome ? `#${link.anchor}` : `/#${link.anchor}`}
+              onClick={(e) => handleNavClick(e, link.anchor)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
             >
               {link.name}
@@ -85,9 +99,9 @@ export const Header = () => {
             {navLinks.map((link) => (
               <a
                 key={link.name}
-                href={link.href}
+                href={isHome ? `#${link.anchor}` : `/#${link.anchor}`}
+                onClick={(e) => handleNavClick(e, link.anchor)}
                 className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
               </a>
