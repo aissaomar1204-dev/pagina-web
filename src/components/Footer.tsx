@@ -63,7 +63,7 @@ export const Footer = () => {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <Mail size={16} />
-                <a href="mailto:contacto@anubisaiagency.com" className="hover:text-foreground transition-colors">
+                <a href="#contact" className="hover:text-foreground transition-colors">
                   contacto@anubisaiagency.com
                 </a>
               </li>
