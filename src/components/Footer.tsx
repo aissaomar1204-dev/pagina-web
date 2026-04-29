@@ -84,8 +84,8 @@ export const Footer = () => {
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <p>© {currentYear} Anubis AI Agency. Todos los derechos reservados.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-foreground transition-colors">Instagram</a>
+            <a href="https://www.linkedin.com/in/aissa-omar-el-hammouti-chachoui-78a965255/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a>
+            <a href="https://www.instagram.com/anubisaiagency/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Instagram</a>
           </div>
         </div>
       </div>
