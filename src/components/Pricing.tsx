@@ -38,7 +38,7 @@ const plans: Plan[] = [
   {
     name: 'Advanced',
     setup: '250€ setup único',
-    stores: '10 tiendas/mes',
+    stores: '5 tiendas/mes',
     priceOld: '97€',
     priceNow: '67.99€',
     period: '/mes',
@@ -59,7 +59,7 @@ const plans: Plan[] = [
   {
     name: 'Titan',
     setup: '500€ setup único',
-    stores: 'Tiendas ilimitadas',
+    stores: '10 tiendas/mes',
     priceOld: '297€',
     priceNow: '147€',
     period: '/mes',
