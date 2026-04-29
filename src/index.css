@@ -85,12 +85,25 @@
   .glass {
     @apply bg-white/70 backdrop-blur-lg border border-white/20;
   }
-  
+
   .glass-dark {
     @apply bg-black/70 backdrop-blur-lg border border-white/10;
   }
-  
+
   .text-balance {
     text-wrap: balance;
   }
 }
+
+/* Hero orb float animation — CSS only, zero JS */
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-24px) scale(1.04); }
+}
+@keyframes hero-float-b {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(18px) scale(0.97); }
+}
+.animate-hero-float   { animation: hero-float   7s ease-in-out infinite; }
+.animate-hero-float-b { animation: hero-float-b 9s ease-in-out infinite 1.5s; }
+.animate-hero-float-c { animation: hero-float   11s ease-in-out infinite 3s; }
